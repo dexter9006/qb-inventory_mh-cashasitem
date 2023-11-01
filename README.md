@@ -2,6 +2,7 @@
 
 # Compatible
 - [mh-cashasitem](https://github.com/MaDHouSe79/mh-cashasitem)
+- [mh-blackmarket](https://github.com/MaDHouSe79/mh-blackmarket)
 
 ## Dependencies
 - [qb-core](https://github.com/qbcore-framework/qb-core)
