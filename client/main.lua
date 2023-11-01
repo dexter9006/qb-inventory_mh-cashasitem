@@ -663,6 +663,16 @@ RegisterCommand('closeinv', function()
     closeInventory()
 end, false)
 
+local function isAllowToOpen(vehicle)
+    if GetVehicleClass(vehicle) == 18 then
+        if PlayerData.job.name == 'police' or PlayerData.job.name == 'ambulance' then
+            return true
+        end
+    else 
+        return true
+    end
+end
+
 RegisterCommand('inventory', function()
     if IsNuiFocused() then return end
     if not isCrafting and not inInventory then
@@ -710,11 +720,24 @@ RegisterCommand('inventory', function()
                 local slots = trunkConfig.slots
                 local maxweight = trunkConfig.maxWeight
                 if not slots or not maxweight then return print('Cannot get the vehicle slots and maxweight') end
-
                 local other = {
                     maxweight = maxweight,
                     slots = slots,
                 }
+                local vehicleClass = GetVehicleClass(curVeh)
+                local slots = 35
+                if Config.OnlyJobCanOpenJobVehicleTrucks then
+                    local canOpen = isAllowToOpen(curVeh)
+                    if canOpen then 
+                        TriggerServerEvent("inventory:server:OpenInventory", "trunk", CurrentVehicle, other)
+                        OpenTrunk()
+                    else
+                        QBCore.Functions.Notify(Lang:t('notify.can_not_open'), "error", 5000)
+                    end
+                else
+                    TriggerServerEvent("inventory:server:OpenInventory", "trunk", CurrentVehicle, other)
+                    OpenTrunk()
+                end
 
                 TriggerServerEvent('inventory:server:OpenInventory', 'trunk', CurrentVehicle, other)
                 OpenTrunk()
