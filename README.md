@@ -1,5 +1,17 @@
 # qb-inventory
 
+# Compatible
+- [mh-cashasitem](https://github.com/MaDHouSe79/mh-cashasitem)
+
+## Dependencies
+- [qb-core](https://github.com/qbcore-framework/qb-core)
+- [qb-logs](https://github.com/qbcore-framework/qb-logs) - For logging transfer and other history
+- [qb-traphouse](https://github.com/qbcore-framework/qb-traphouse) - Trap house system for qbcore
+- [qb-radio](https://github.com/qbcore-framework/qb-radio) - Radio system for communication
+- [qb-drugs](https://github.com/qbcore-framework/qb-drugs) -  Drugs and Weed Planting System
+- [qb-shops](https://github.com/qbcore-framework/qb-shops) - Needed in order to add shops
+
+
 # License
 
     QBCore Framework
@@ -17,14 +29,3 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>
-
-# Compatible
-- [mh-cashasitem](https://github.com/MaDHouSe79/mh-cashasitem)
-
-## Dependencies
-- [qb-core](https://github.com/qbcore-framework/qb-core)
-- [qb-logs](https://github.com/qbcore-framework/qb-logs) - For logging transfer and other history
-- [qb-traphouse](https://github.com/qbcore-framework/qb-traphouse) - Trap house system for qbcore
-- [qb-radio](https://github.com/qbcore-framework/qb-radio) - Radio system for communication
-- [qb-drugs](https://github.com/qbcore-framework/qb-drugs) -  Drugs and Weed Planting System
-- [qb-shops](https://github.com/qbcore-framework/qb-shops) - Needed in order to add shops
