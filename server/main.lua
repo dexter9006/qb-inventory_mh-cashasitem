@@ -1853,9 +1853,6 @@ RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
             itemData.info.quality and itemData.info.quality > 0)
         TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
     elseif itemData.useable then
-        if Config.Stashes[itemData.name:lower()] then
-            lastUsedStashItem = itemData
-        end
         UseItem(itemData.name, src, itemData)
         TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
     end
@@ -1876,52 +1873,13 @@ RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
             itemData.info.quality and itemData.info.quality > 0)
         TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
     else
-        if Config.Stashes[itemData.name:lower()] then
-            lastUsedStashItem = itemData
+        if itemData.name == "weapon_hazardcan" or itemData.name == "weapon_petrolcan" or itemData.name == "weapon_fireextinguisher" then
+            TriggerClientEvent("inventory:client:UseWeapon", src, itemData, true)
         end
         UseItem(itemData.name, src, itemData)
         TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
     end
 end)
-
-RegisterNetEvent('inventory:server:SetAsLastUseStashItem', function(item)
-    lastUsedStashItem = item
-    -- print(json.encode(lastUsedStashItem.name, {indent = true}))
-end)
-
-local function IsItemAllowedToAdd(src, stash, item)
-    if Config.Stashes[stash] then
-        if lastUsedStashItem ~= nil then
-            if lastUsedStashItem.info.allowedItems ~= nil then
-                if not lastUsedStashItem.info.allowedItems[item.name] then
-                    TriggerEvent('mh-stashes:server:allowed_items_error', src, lastUsedStashItem.info.allowedItems)
-                    lastUsedStashItem = nil
-                    return false
-                end
-            end
-        end
-    end
-    return true
-end
-
-local function IsStashItemLootable(src, stash, item)
-    if Config.Stashes[stash] then
-        if lastUsedStashItem ~= nil then
-            if lastUsedStashItem and lastUsedStashItem.info then
-                if not lastUsedStashItem.info.canloot then
-                    TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
-                    lastUsedStashItem = nil
-                    return false
-                elseif lastUsedStashItem.info.isOnMission then
-                    TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
-                    lastUsedStashItem = nil
-                    return false
-                end
-            end
-        end
-    end
-    return true
-end
 
 RegisterNetEvent('inventory:server:SetInventoryData',
     function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
