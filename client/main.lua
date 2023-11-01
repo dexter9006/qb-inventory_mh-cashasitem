@@ -725,7 +725,6 @@ RegisterCommand('inventory', function()
                     slots = slots,
                 }
                 local vehicleClass = GetVehicleClass(curVeh)
-                local slots = 35
                 if Config.OnlyJobCanOpenJobVehicleTrucks then
                     local canOpen = isAllowToOpen(curVeh)
                     if canOpen then 
